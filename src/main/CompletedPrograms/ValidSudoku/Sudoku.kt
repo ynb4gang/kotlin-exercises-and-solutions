@@ -23,17 +23,17 @@ class Solution {
 fun main() {
     val sudokuBoard = Array(9) { CharArray(9) }
 
-    println("Введите значения для судоку, используя цифры от 1 до 9 и точку для пустых ячеек:")
+    println("Enter values for the Sudoku, using digits from 1 to 9 and a dot (.) for empty cells:")
 
     for (i in 0 until 9) {
-        print("Строка ${i + 1}: ")
+        print("Row ${i + 1}: ")
         val inputRow = readLine()
         if (inputRow != null && inputRow.length == 9) {
             for (j in 0 until 9) {
                 sudokuBoard[i][j] = inputRow[j]
             }
         } else {
-            println("Некорректный ввод. Пожалуйста, введите 9 символов.")
+            println("Incorrect input. Please enter 9 characters.")
             return
         }
     }
@@ -42,8 +42,8 @@ fun main() {
     val result = solution.isValidSudoku(sudokuBoard)
 
     if (result) {
-        println("Данное судоку является корректным.")
+        println("This Sudoku is valid.")
     } else {
-        println("Данное судоку не является корректным.")
+        println("This Sudoku is not valid.")
     }
 }
