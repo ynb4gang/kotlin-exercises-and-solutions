@@ -116,6 +116,61 @@ Feel free to explore and contribute! 🌟
      }
      ```
    - **How to Run:** Copy the code into a Kotlin environment and execute the `main` function. Follow the on-screen instructions to check the validity of a Sudoku board.
+3. ## Koko Eating Bananas
+
+### Description:
+The "Koko Eating Bananas" program solves a classic algorithmic problem. Koko loves eating bananas, and there are N piles of bananas, where the i-th pile contains `piles[i]` bananas. Koko can eat bananas from the piles, and each day she chooses a pile, eats some bananas, and removes a portion of the pile. The goal is to determine the minimum integer `K` such that Koko can eat all the bananas within `H` hours. If Koko eats `K` bananas from a pile on a given day, then on the next day, she must eat at least the same number of bananas from another pile or the same pile.
+
+### Implementation:
+
+```kotlin
+package KokoEatingBananas
+
+class Solution {
+    fun minEatingSpeed(piles: IntArray, h: Int): Int {
+        var left = 1
+        var max = 0
+        for (pile in piles) {
+            max = maxOf(max, pile)
+        }
+        var right = max
+
+        while (left < right) {
+            val mid = left + (right - left) / 2
+
+            if (canEat(piles, h, mid)) {
+                right = mid
+            } else {
+                left = mid + 1
+            }
+        }
+
+        return left
+    }
+
+    fun canEat(piles: IntArray, h: Int, k: Int): Boolean {
+        var hours = 0
+
+        for (pile in piles) {
+            hours += (pile + k - 1) / k
+        }
+
+        return hours <= h
+    }
+}
+
+fun main() {
+    val solution = Solution()
+
+    val piles = intArrayOf(3, 6, 7, 11)
+    val h = 8
+
+    val result = solution.minEatingSpeed(piles, h)
+
+    println("Koko can eat $result bananas in $h hours.")
+}
+```
+- **How to Run:** Copy the code into a Kotlin environment and execute the main function. Follow the on-screen instructions to calculate the minimum eating speed K for Koko to consume all bananas within H hours.
 
 ## How to Contribute 🤝
 
