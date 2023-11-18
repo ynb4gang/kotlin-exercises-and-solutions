@@ -1,4 +1,5 @@
 # Kotlin Exercises and Solutions 🚀
+[![Maintainability](https://api.codeclimate.com/v1/badges/83beaf52f0ed1b5352f9/maintainability)](https://codeclimate.com/github/ynb4gang/kotlin-exercises-and-solutions/maintainability)
 
 Welcome to the "Kotlin Exercises and Solutions" repository! This collection of Kotlin exercises is crafted for completing assignments and improving programming skills.
 
