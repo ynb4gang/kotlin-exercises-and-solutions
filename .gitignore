@@ -36,4 +36,4 @@ bin/
 # Папка сборки Gradle
 build/
 
-kotlin-exercises-and-solutions.iml
+*.iml
