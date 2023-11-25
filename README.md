@@ -174,61 +174,50 @@ Feel free to explore and contribute! 🌟
 
 4. **Rock, Paper, Scissors Game**
    - **Description:** The Rock, Paper, Scissors game is a console-based application where the user can play against the computer. The user selects Rock, Paper, or Scissors, and the computer makes a random choice. The winner is determined based on the game rules: Rock crushes Scissors, Scissors cuts Paper, and Paper covers Rock.
-   - **Code:**
-     ```kotlin
-     // Rock, Paper, Scissors Game Code
-     import java.util.*
+### Rock, Paper, Scissors Game
 
-     fun main() {
-         val scanner = Scanner(System.`in`)
+```kotlin
+// Rock, Paper, Scissors Game Code
+package rockPaperScissors
 
-         while (true) {
-             println("Choose: 1 - Rock, 2 - Scissors, 3 - Paper, 0 - Quit the game")
-             val userChoice = scanner.nextInt()
+import java.util.*
 
-             if (userChoice == 0) {
-                 break
-             }
+object Game {
+    @JvmStatic
+    fun main(args: Array<String>) {
+        val scanner = Scanner(System.`in`)
+        val choices = arrayOf("", "Rock", "Scissors", "Paper")
+        while (true) {
+            println("Choose: 1 - Rock, 2 - Scissors, 3 - Paper, 0 - Quit the game")
+            val userChoice = scanner.nextInt()
+            if (userChoice == 0) {
+                break
+            }
+            val computerChoice = Random().nextInt(choices.size - 1) + 1
+            println("Your choice: " + choices[userChoice])
+            println("Computer's choice: " + choices[computerChoice])
+            val result = determineWinner(userChoice, computerChoice)
+            when (result) {
+                0 -> println("It's a tie!")
+                1 -> println("You win!")
+                -1 -> println("You lose!")
+            }
+        }
+        println("Game over.")
+    }
 
-             val computerChoice = (1..3).random()
-
-             println("Your choice: ${getChoiceName(userChoice)}")
-             println("Computer's choice: ${getChoiceName(computerChoice)}")
-
-             val result = determineWinner(userChoice, computerChoice)
-
-             when (result) {
-                 0 -> println("It's a tie!")
-                 1 -> println("You win!")
-                 -1 -> println("You lose!")
-             }
-         }
-
-         println("Game over.")
-     }
-
-     fun getChoiceName(choice: Int): String {
-         return when (choice) {
-             1 -> "Rock"
-             2 -> "Scissors"
-             3 -> "Paper"
-             else -> throw IllegalArgumentException("Invalid choice")
-         }
-     }
-
-     fun determineWinner(userChoice: Int, computerChoice: Int): Int {
-         if (userChoice == computerChoice) {
-             return 0 // It's a tie
-         }
-
-         return when (userChoice) {
-             1 -> if (computerChoice == 2) 1 else -1 // Rock
-             2 -> if (computerChoice == 3) 1 else -1 // Scissors
-             3 -> if (computerChoice == 1) 1 else -1 // Paper
-             else -> throw IllegalArgumentException("Invalid choice")
-         }
-     }
-     ```
+    private fun determineWinner(userChoice: Int, computerChoice: Int): Int {
+        return if (userChoice == computerChoice) {
+            0 // It's a tie
+        } else when (userChoice) {
+            1 -> if (computerChoice == 2) 1 else -1
+            2 -> if (computerChoice == 3) 1 else -1
+            3 -> if (computerChoice == 1) 1 else -1
+            else -> throw IllegalArgumentException("Invalid choice")
+        }
+    }
+}
+ ```
    - **How to Run:** Copy the code into a Kotlin environment and execute the `main` function. Follow the on-screen instructions to play Rock, Paper, Scissors against the computer.
 
 ## How to Contribute 🤝
