@@ -118,61 +118,118 @@ Feel free to explore and contribute! 🌟
      }
      ```
    - **How to Run:** Copy the code into a Kotlin environment and execute the `main` function. Follow the on-screen instructions to check the validity of a Sudoku board.
-3. ## Koko Eating Bananas
 
-### Description:
-The "Koko Eating Bananas" program solves a classic algorithmic problem. Koko loves eating bananas, and there are N piles of bananas, where the i-th pile contains `piles[i]` bananas. Koko can eat bananas from the piles, and each day she chooses a pile, eats some bananas, and removes a portion of the pile. The goal is to determine the minimum integer `K` such that Koko can eat all the bananas within `H` hours. If Koko eats `K` bananas from a pile on a given day, then on the next day, she must eat at least the same number of bananas from another pile or the same pile.
+3. **Koko Eating Bananas**
+   - **Description:** The "Koko Eating Bananas" program solves a classic algorithmic problem. Koko loves eating bananas, and there are N piles of bananas, where the i-th pile contains `piles[i]` bananas. Koko can eat bananas from the piles, and each day she chooses a pile, eats some bananas, and removes a portion of the pile. The goal is to determine the minimum integer `K` such that Koko can eat all the bananas within `H` hours. If Koko eats `K` bananas from a pile on a given day, then on the next day, she must eat at least the same number of bananas from another pile or the same pile.
+   - **Code:**
+     ```kotlin
+     // Koko Eating Bananas Code
+     package KokoEatingBananas
 
-### Implementation:
+     class Solution {
+         fun minEatingSpeed(piles: IntArray, h: Int): Int {
+             var left = 1
+             var max = 0
+             for (pile in piles) {
+                 max = maxOf(max, pile)
+             }
+             var right = max
 
-```kotlin
-package KokoEatingBananas
+             while (left < right) {
+                 val mid = left + (right - left) / 2
 
-class Solution {
-    fun minEatingSpeed(piles: IntArray, h: Int): Int {
-        var left = 1
-        var max = 0
-        for (pile in piles) {
-            max = maxOf(max, pile)
-        }
-        var right = max
+                 if (canEat(piles, h, mid)) {
+                     right = mid
+                 } else {
+                     left = mid + 1
+                 }
+             }
 
-        while (left < right) {
-            val mid = left + (right - left) / 2
+             return left
+         }
 
-            if (canEat(piles, h, mid)) {
-                right = mid
-            } else {
-                left = mid + 1
-            }
-        }
+         fun canEat(piles: IntArray, h: Int, k: Int): Boolean {
+             var hours = 0
 
-        return left
-    }
+             for (pile in piles) {
+                 hours += (pile + k - 1) / k
+             }
 
-    fun canEat(piles: IntArray, h: Int, k: Int): Boolean {
-        var hours = 0
+             return hours <= h
+         }
+     }
 
-        for (pile in piles) {
-            hours += (pile + k - 1) / k
-        }
+     fun main() {
+         val solution = Solution()
 
-        return hours <= h
-    }
-}
+         val piles = intArrayOf(3, 6, 7, 11)
+         val h = 8
 
-fun main() {
-    val solution = Solution()
+         val result = solution.minEatingSpeed(piles, h)
 
-    val piles = intArrayOf(3, 6, 7, 11)
-    val h = 8
+         println("Koko can eat $result bananas in $h hours.")
+     }
+     ```
+   - **How to Run:** Copy the code into a Kotlin environment and execute the main function. Follow the on-screen instructions to calculate the minimum eating speed K for Koko to consume all bananas within H hours.
 
-    val result = solution.minEatingSpeed(piles, h)
+4. **Rock, Paper, Scissors Game**
+   - **Description:** The Rock, Paper, Scissors game is a console-based application where the user can play against the computer. The user selects Rock, Paper, or Scissors, and the computer makes a random choice. The winner is determined based on the game rules: Rock crushes Scissors, Scissors cuts Paper, and Paper covers Rock.
+   - **Code:**
+     ```kotlin
+     // Rock, Paper, Scissors Game Code
+     import java.util.*
 
-    println("Koko can eat $result bananas in $h hours.")
-}
-```
-- **How to Run:** Copy the code into a Kotlin environment and execute the main function. Follow the on-screen instructions to calculate the minimum eating speed K for Koko to consume all bananas within H hours.
+     fun main() {
+         val scanner = Scanner(System.`in`)
+
+         while (true) {
+             println("Choose: 1 - Rock, 2 - Scissors, 3 - Paper, 0 - Quit the game")
+             val userChoice = scanner.nextInt()
+
+             if (userChoice == 0) {
+                 break
+             }
+
+             val computerChoice = (1..3).random()
+
+             println("Your choice: ${getChoiceName(userChoice)}")
+             println("Computer's choice: ${getChoiceName(computerChoice)}")
+
+             val result = determineWinner(userChoice, computerChoice)
+
+             when (result) {
+                 0 -> println("It's a tie!")
+                 1 -> println("You win!")
+                 -1 -> println("You lose!")
+             }
+         }
+
+         println("Game over.")
+     }
+
+     fun getChoiceName(choice: Int): String {
+         return when (choice) {
+             1 -> "Rock"
+             2 -> "Scissors"
+             3 -> "Paper"
+             else -> throw IllegalArgumentException("Invalid choice")
+         }
+     }
+
+     fun determineWinner(userChoice: Int, computerChoice: Int): Int {
+         if (userChoice == computerChoice) {
+             return 0 // It's a tie
+         }
+
+         return when (userChoice) {
+             1 -> if (computerChoice == 2) 1 else -1 // Rock
+             2 -> if (computerChoice == 3) 1 else -1 // Scissors
+             3 -> if (computerChoice == 1) 1 else -1 // Paper
+             else -> throw IllegalArgumentException("Invalid choice")
+         }
+     }
+     ```
+   - **How to Run:** Copy the code into a Kotlin environment and execute the `main` function. Follow the on-screen instructions to play Rock, Paper, Scissors against the computer.
 
 ## How to Contribute 🤝
 
