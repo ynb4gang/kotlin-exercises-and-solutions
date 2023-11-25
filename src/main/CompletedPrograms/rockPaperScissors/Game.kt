@@ -1,4 +1,3 @@
-// Rock, Paper, Scissors Game Code
 package rockPaperScissors
 
 import java.util.*
