@@ -1,4 +1,5 @@
 package RottingOranges
+
 class Solution {
     fun orangesRotting(grid: Array<IntArray>): Int {
         if (grid.isEmpty() || grid[0].isEmpty()) return -1
@@ -19,7 +20,10 @@ class Solution {
     }
 
     private fun rotAdjacent(grid: Array<IntArray>, i: Int, j: Int, minutes: Int) {
-        if (i < 0 || i >= grid.size || j < 0 || j >= grid[0].size || grid[i][j] == 0 || (1 < grid[i][j] && grid[i][j] < minutes)) {
+        val rows = grid.size
+        val cols = grid[0].size
+
+        if (i !in 0 until rows || j !in 0 until cols || grid[i][j] == 0 || (1 < grid[i][j] && grid[i][j] < minutes)) {
             return
         } else {
             grid[i][j] = minutes
@@ -47,4 +51,3 @@ fun main() {
         println("It's impossible for all oranges to rot.")
     }
 }
-
